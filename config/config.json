@@ -1,0 +1,18 @@
+{
+  "development": {
+    "dialect": "postgres",
+    "url": "postgresql://admin:B8zK1LF0sA6TF0wkHV3zTP8x7HVxEsuX@dpg-cpsiga56l47c73e66tng-a.frankfurt-postgres.render.com/phone_cataglog",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    },
+    "modelsPath": "src/models",
+    "models": "src/models/*.ts",
+    "migrationStorageTableName": "sequelize_meta",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_data",
+    "migrationStorage": "sequelize"
+  }
+}

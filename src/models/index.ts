@@ -1,5 +1,6 @@
-import { Sequelize } from "sequelize";
+import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
+import Product from "./product";
 
 dotenv.config();
 
@@ -9,13 +10,14 @@ if (!process.env.DATABASE_URL) {
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
-  logging: false,
+  models: [Product], // Register your models here
   dialectOptions: {
     ssl: {
       require: true,
       rejectUnauthorized: false,
     },
   },
+  logging: false,
 });
 
 export { sequelize };
