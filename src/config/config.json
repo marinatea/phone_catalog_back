@@ -11,6 +11,7 @@
     "modelsPath": "src/models",
     "models": "src/models/*.ts",
     "migrationStorageTableName": "sequelize_meta",
+    "seeders-path": "src/seeders",
     "seederStorage": "sequelize",
     "seederStorageTableName": "sequelize_data",
     "migrationStorage": "sequelize"
