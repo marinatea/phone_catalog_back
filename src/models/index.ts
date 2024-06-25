@@ -1,6 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
 import dotenv from "dotenv";
-import Product from "./product";
+import { ProductMap } from "./product";
+import { PhoneMap } from "./phone";
+import { AccessoryMap } from "./accessory";
+import { TabletMap } from "./tablet";
 
 dotenv.config();
 
@@ -8,9 +11,9 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is not defined in environment variables");
 }
 
+
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
-  models: [Product], // Register your models here
   dialectOptions: {
     ssl: {
       require: true,
@@ -19,5 +22,10 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   },
   logging: false,
 });
+
+ProductMap(sequelize);
+PhoneMap(sequelize);
+AccessoryMap(sequelize);
+TabletMap(sequelize);
 
 export { sequelize };

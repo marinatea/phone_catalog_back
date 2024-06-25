@@ -1,50 +1,65 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Model, Sequelize, DataTypes } from 'sequelize';
 
-@Table({
-  tableName: "Products",
-  modelName: "Product",
-})
-class Product extends Model {
-  @Column({
-    type: DataType.INTEGER,
-    primaryKey: true,
-  })
-  id!: number;
-
-  @Column(DataType.STRING)
-  category!: string;
-
-  @Column({
-    type: DataType.STRING,
-  })
-  itemId!: string;
-
-  @Column(DataType.STRING)
-  name!: string;
-
-  @Column(DataType.INTEGER)
-  fullPrice!: number;
-
-  @Column(DataType.INTEGER)
-  price!: number;
-
-  @Column(DataType.STRING)
-  screen!: string;
-
-  @Column(DataType.STRING)
-  capacity!: string;
-
-  @Column(DataType.STRING)
-  color!: string;
-
-  @Column(DataType.STRING)
-  ram!: string;
-
-  @Column(DataType.INTEGER)
-  year!: number;
-
-  @Column(DataType.STRING)
-  image!: string;
+export default class Product extends Model {
+  public id!: number;
+  public category!: string;
+  public itemId!: string;
+  public name!: string;
+  public fullPrice!: number;
+  public price!: number;
+  public screen!: string;
+  public capacity!: string;
+  public color!: string;
+  public ram!: string;
+  public year!: number;
+  public image!: string;
 }
 
-export default Product;
+export const ProductMap = (sequelize: Sequelize) => {
+  Product.init({
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    category: {
+      type: DataTypes.STRING(255)
+    },
+    itemId: {
+      type: DataTypes.STRING(255)
+    },
+    name: {
+      type: DataTypes.STRING(255)
+    },
+    fullPrice: {
+      type: DataTypes.INTEGER
+    },
+    price: {
+      type: DataTypes.INTEGER
+    },
+    screen: {
+      type: DataTypes.STRING(255)
+    },
+    capacity: {
+      type: DataTypes.STRING(255)
+    },
+    color: {
+      type: DataTypes.STRING(255)
+    },
+    ram: {
+      type: DataTypes.STRING(255)
+    },
+    year: {
+      type: DataTypes.INTEGER
+    },
+    image: {
+      type: DataTypes.STRING(255)
+    }
+  }, {
+    sequelize,
+    tableName: 'Products',
+    timestamps: false
+  });
+  Product.sync();
+}
+
