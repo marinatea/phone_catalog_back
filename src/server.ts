@@ -3,8 +3,6 @@ import express, { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
 import { sequelize } from "./models";
 import productRouter from "./routes/products.router";
-import { handleErrors } from "./utils/handleErrors";
-import Product from "./models/product";
 
 const app: Application = express();
 
