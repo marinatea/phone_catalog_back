@@ -115,6 +115,24 @@ const getHotPricesProducts: ControllerAction = async (req, res) => {
   }
 };
 
-const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts };
+const getByQuery: ControllerAction = async(req, res) => {
+    const { query } = req.params
+    try {
+        const allProducts = await productService.getProductsByQuery(query);
+
+        if (!allProducts) {
+          res.status(404).json({
+            errType: "404",
+            msg: "Product not found",
+          });
+          return;
+        }
+        res.send(allProducts);
+    } catch (error) {
+      handleErrors(res, error);
+    }
+}
+
+const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts, getByQuery };
 
 export default productController;
