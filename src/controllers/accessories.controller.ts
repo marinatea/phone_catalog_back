@@ -1,5 +1,5 @@
 import { ControllerAction } from '../utils/types';
-import accessoryService from '../servises/accessories.servise';
+import accessoryService from '../services/accessories.services';
 import { handleErrors } from '../utils/handleErrors';
 
 const getAll: ControllerAction = async (req, res) => {
