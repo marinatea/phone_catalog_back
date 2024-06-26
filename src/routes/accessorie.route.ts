@@ -1,5 +1,5 @@
-import express from 'express';
 import accessoryController from '../controllers/accessories.controller';
+import express from 'express';
 
 const accessoryRouter = express.Router();
 

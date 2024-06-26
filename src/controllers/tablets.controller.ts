@@ -1,6 +1,6 @@
-import tabletService from '../servises/tablets.servise';
-import { handleErrors } from '../utils/handleErrors';
 import { ControllerAction } from '../utils/types';
+import { handleErrors } from '../utils/handleErrors';
+import tabletService from '../servises/tablets.servise';
 
 const getAll: ControllerAction = async (req, res) => {
   try {
@@ -8,14 +8,14 @@ const getAll: ControllerAction = async (req, res) => {
 
     if (!allTablets) {
       res.status(404).json({
-        errType: "404",
-        msg: 'Not Found: The specified entity does not exist'
+        errType: '404',
+        msg: 'Not Found: The specified entity does not exist',
       });
       return;
     }
     res.send(allTablets);
   } catch (error) {
-    handleErrors(res, error)
+    handleErrors(res, error);
   }
 };
 
@@ -26,8 +26,8 @@ const getById: ControllerAction = async (req, res) => {
 
     if (!tablet) {
       res.status(404).json({
-        errType: "404",
-        msg: 'Not Found: The specified entity does not exist'
+        errType: '404',
+        msg: 'Not Found: The specified entity does not exist',
       });
       return;
     }
@@ -37,7 +37,6 @@ const getById: ControllerAction = async (req, res) => {
     handleErrors(res, error);
   }
 };
-
 
 const tabletController = { getAll, getById };
 

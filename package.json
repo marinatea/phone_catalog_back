@@ -5,7 +5,8 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint src/**/*.{js,ts}"
   },
   "keywords": [],
   "author": "",
@@ -23,9 +24,13 @@
     "typescript": "^5.5.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.5.0",
     "@types/node": "^20.14.8",
     "@types/sequelize": "^4.28.20",
+    "eslint": "^9.5.0",
+    "globals": "^15.6.0",
     "nodemon": "^3.1.4",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "typescript-eslint": "^7.14.1"
   }
 }
