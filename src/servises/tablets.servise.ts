@@ -8,7 +8,6 @@ const getTabletById = async (tabletId: string) => {
   return Tablet.findByPk(tabletId);
 };
 
-
 const tabletService = { getAllTablets, getTabletById };
 
 export default tabletService;

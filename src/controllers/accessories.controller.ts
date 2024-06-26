@@ -1,6 +1,6 @@
+import { ControllerAction } from '../utils/types';
 import accessoryService from '../servises/accessories.servise';
 import { handleErrors } from '../utils/handleErrors';
-import { ControllerAction } from '../utils/types';
 
 const getAll: ControllerAction = async (req, res) => {
   try {
@@ -8,8 +8,8 @@ const getAll: ControllerAction = async (req, res) => {
 
     if (!allAccessories) {
       res.status(404).json({
-        errType: "404",
-        msg: 'Not Found: The specified entity does not exist'
+        errType: '404',
+        msg: 'Not Found: The specified entity does not exist',
       });
       return;
     }
@@ -26,8 +26,8 @@ const getById: ControllerAction = async (req, res) => {
 
     if (!accessory) {
       res.status(404).json({
-        errType: "404",
-        msg: 'Not Found: The specified entity does not exist'
+        errType: '404',
+        msg: 'Not Found: The specified entity does not exist',
       });
       return;
     }

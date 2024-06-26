@@ -8,6 +8,6 @@ const getPhoneById = async (phoneId: string) => {
   return Phone.findByPk(phoneId);
 };
 
-const phoneService = { getAllPhones, getPhoneById};
+const phoneService = { getAllPhones, getPhoneById };
 
 export default phoneService;
