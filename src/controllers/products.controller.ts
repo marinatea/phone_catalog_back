@@ -1,22 +1,38 @@
-import { ControllerAction } from '../utils/types';
-import Product from '../models/product';
-import { handleErrors } from '../utils/handleErrors';
-import productService from '../services/products.services';
+import { ControllerAction } from "../utils/types";
+import Product from "../models/product";
+import { handleErrors } from "../utils/handleErrors";
+import productService from "../services/products.services";
+import { canTreatArrayAsAnd } from "sequelize/types/utils";
 
 const getAll: ControllerAction = async (req, res) => {
   try {
-    const { page = 1, limit = 16 } = req.query;
+    const {
+      page = 1,
+      limit = 16,
+      sort = "WITHOUT_SORT",
+      category = "",
+    } = req.query;
     const parsedPage = parseInt(page as string, 10);
     const parsedLimit = parseInt(limit as string, 10);
 
-    if (isNaN(parsedPage) || isNaN(parsedLimit) || parsedPage < 1 || parsedLimit < 1) {
+    if (
+      isNaN(parsedPage) ||
+      isNaN(parsedLimit) ||
+      parsedPage < 1 ||
+      parsedLimit < 1
+    ) {
       return res.status(400).json({
-        errType: '400',
-        msg: 'Invalid page or limit parameters',
+        errType: "400",
+        msg: "Invalid page or limit parameters",
       });
     }
 
-    const products = await productService.getAllProducts(parsedPage, parsedLimit);
+    const products = await productService.getAllProducts(
+      parsedPage,
+      parsedLimit,
+      sort as string,
+      category as string
+    );
 
     res.json(products);
   } catch (error) {
@@ -30,8 +46,8 @@ const getProductId: ControllerAction = async (req, res) => {
 
     if (isNaN(productId)) {
       return res.status(400).json({
-        errType: '400',
-        msg: 'Invalid product ID',
+        errType: "400",
+        msg: "Invalid product ID",
       });
     }
 
@@ -39,8 +55,8 @@ const getProductId: ControllerAction = async (req, res) => {
 
     if (!product) {
       return res.status(404).json({
-        errType: '404',
-        msg: 'Product not found',
+        errType: "404",
+        msg: "Product not found",
       });
     }
 
@@ -56,8 +72,8 @@ const getRecommended: ControllerAction = async (req, res) => {
 
     if (isNaN(productId)) {
       return res.status(400).json({
-        errType: '400',
-        msg: 'Invalid product ID',
+        errType: "400",
+        msg: "Invalid product ID",
       });
     }
 
@@ -65,12 +81,14 @@ const getRecommended: ControllerAction = async (req, res) => {
 
     if (!product) {
       return res.status(404).json({
-        errType: '404',
-        msg: 'Product not found',
+        errType: "404",
+        msg: "Product not found",
       });
     }
 
-    const recommendedProducts = await productService.getRecommendedProducts(productId);
+    const recommendedProducts = await productService.getRecommendedProducts(
+      productId
+    );
 
     res.json(recommendedProducts);
   } catch (error) {
