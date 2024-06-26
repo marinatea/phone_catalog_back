@@ -88,12 +88,22 @@ const getHotPricesProducts = async () => {
   });
 };
 
+const getProductsByQuery= async(query: string) => {
+    return Product.findAll({
+        limit: 5,
+        where: {
+            name: Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('name')), 'LIKE', '%' + query.toLocaleLowerCase() + '%')
+        }
+    })
+}
+
 const productService = {
   getAllProducts,
   getRecommendedProducts,
   getItemsPerPageOptions,
   getHotPricesProducts,
   getNewModelsProducts,
+  getProductsByQuery,
 };
 
 
