@@ -1,6 +1,6 @@
 import { ControllerAction } from '../utils/types';
 import { handleErrors } from '../utils/handleErrors';
-import tabletService from '../servises/tablets.servise';
+import tabletService from '../services/tablets.services';
 
 const getAll: ControllerAction = async (req, res) => {
   try {
