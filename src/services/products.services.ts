@@ -1,6 +1,7 @@
 import { Op } from "sequelize";
 import Product from "../models/product";
 import { OrderItem } from "../utils/types";
+import { Sequelize } from "sequelize-typescript";
 
 const itemsPerPageOptions = [
   { value: 8, label: "8" },
@@ -67,11 +68,33 @@ const getRecommendedProducts = async (productId: number, limit: number = 4) => {
 const getItemsPerPageOptions = () => {
   return itemsPerPageOptions;
 };
+const getNewModelsProducts = async () => {
+  return Product.findAll({
+    order: [['year', 'DESC']],
+    limit: 20,
+  });
+};
+
+
+const getHotPricesProducts = async () => {
+  return Product.findAll({
+     attributes: {
+      include: [
+        [Sequelize.literal('"fullPrice" - "price"'), 'discountAmount']
+      ]
+    },
+    order: [[Sequelize.literal('"discountAmount"'), 'DESC']],
+    limit: 16,
+  });
+};
 
 const productService = {
   getAllProducts,
   getRecommendedProducts,
   getItemsPerPageOptions,
+  getHotPricesProducts,
+  getNewModelsProducts,
 };
+
 
 export default productService;

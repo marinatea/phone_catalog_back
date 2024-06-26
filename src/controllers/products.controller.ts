@@ -95,6 +95,26 @@ const getRecommended: ControllerAction = async (req, res) => {
     handleErrors(res, error);
   }
 };
-const productController = { getAll, getRecommended, getProductId };
+
+const getNewModelsProducts: ControllerAction = async (req, res) => {
+  try {
+    const products = await productService.getNewModelsProducts();
+    res.send(products);
+  } catch (error) {
+    handleErrors(res, error);
+  }
+};
+
+
+const getHotPricesProducts: ControllerAction = async (req, res) => {
+  try {
+    const products = await productService.getHotPricesProducts();
+    res.send(products);
+  } catch (error) {
+    handleErrors(res, error);
+  }
+};
+
+const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts };
 
 export default productController;
