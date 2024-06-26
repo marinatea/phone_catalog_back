@@ -16,14 +16,9 @@ const getAll: ControllerAction = async (req, res) => {
       });
     }
 
-    const { count, rows } = await productService.getAllProducts(parsedPage, parsedLimit);
+    const products = await productService.getAllProducts(parsedPage, parsedLimit);
 
-    res.json({
-      page: parsedPage,
-      limit: parsedLimit,
-      total: count,
-      products: rows,
-    });
+    res.json(products);
   } catch (error) {
     handleErrors(res, error);
   }
