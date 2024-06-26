@@ -3,9 +3,11 @@ import express, { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
 import { sequelize } from "./models";
 import productRouter from "./routes/products.router";
+
 import accessoryRouter from "./routes/accessorie.route";
 import phoneRouter from "./routes/phones.route";
 import tabletRouter from "./routes/tablets.route";
+
 
 const app: Application = express();
 
