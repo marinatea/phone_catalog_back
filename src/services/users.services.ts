@@ -5,16 +5,22 @@ const getUser = async (userId: string) => {
 };
 
 const createUser = async (userId: string) => {
-  return User.create({ id: userId, favorites: [], cart: [] });
+  return User.create({ id: userId, favorites: [], cart: {} });
 };
 
 const addToList = async (user: User, newItem: any, type: 'cart' | 'favorites') => {
   try {
-    if (!user[type].some((el) => (type === 'cart' ? el.id === newItem.id : el.itemId === newItem.itemId))) {
-      user[type] = [...user[type], newItem];
-
-      await user.save();
+    if (type === 'cart') {
+      if (!(newItem.id in user.cart)) {
+        user.cart[newItem.id] = newItem;
+      }
+    } else {
+      if (!user.favorites.some((el) => el.itemId === newItem.itemId)) {
+        user[type] = [...user[type], newItem];
+      }
     }
+
+    await user.save();
 
     return user[type];
   } catch (error) {
@@ -24,13 +30,17 @@ const addToList = async (user: User, newItem: any, type: 'cart' | 'favorites') =
 
 const removeFromList = async (user: User, itemId: any, type: 'cart' | 'favorites') => {
   try {
-    const itemIndex = user[type].findIndex((item) => (type === 'cart' ? item.id === itemId : item.itemId === itemId));
+    if (type === 'cart') {
+      if (itemId in user.cart) {
+        delete user.cart[itemId];
+      }
+    } else {
+      const itemIndex = user[type].findIndex((item) => item.itemId === itemId);
 
-    if (itemIndex < 0) {
-      return user[type];
+      if (itemIndex > -1) {
+        user[type] = [...user[type].slice(0, itemIndex), ...user[type].slice(itemIndex + 1)];
+      }
     }
-
-    user[type] = [...user[type].slice(0, itemIndex), ...user[type].slice(itemIndex + 1)];
 
     await user.save();
 
@@ -42,13 +52,9 @@ const removeFromList = async (user: User, itemId: any, type: 'cart' | 'favorites
 
 const patchCartItemCount = async (user: User, itemId: any, newCount: number) => {
   try {
-    const itemIndex = user.cart.findIndex((item) => item.id === itemId);
-
-    if (itemIndex < 0) {
-      return user.cart;
+    if (itemId in user.cart) {
+      user.cart[itemId].count = newCount;
     }
-
-    user.cart[itemIndex].count = newCount;
 
     await user.save();
 

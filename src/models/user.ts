@@ -22,9 +22,9 @@ export const UserMap = (sequelize: Sequelize) => {
         defaultValue: [],
       },
       cart: {
-        type: DataTypes.ARRAY(DataTypes.JSONB),
+        type: DataTypes.JSONB,
         allowNull: false,
-        defaultValue: [],
+        defaultValue: {},
       },
       createdAt: {
         type: DataTypes.DATE,
