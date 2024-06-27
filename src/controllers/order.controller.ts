@@ -29,12 +29,12 @@ const getOrderById = async (req: Request, res: Response) => {
 };
 
 const createOrder = async (req: Request, res: Response) => {
-  const { id, productId, userId, quantity, price, status } = req.body;
+  const { productId, userId, quantity, price, status } = req.body;
 
-  if (!id || !productId || !userId || !quantity || !price || !status) {
+  if (!productId || !userId || !quantity || !price || !status) {
     return res.status(400).json({
       errType: "400",
-      msg: "All fields are required: id, productId, userId, quantity, price, status",
+      msg: "All fields are required: productId, userId, quantity, price, status",
     });
   }
   try {
