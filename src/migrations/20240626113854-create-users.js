@@ -14,9 +14,9 @@ module.exports = {
         defaultValue: [],
       },
       cart: {
-        type: Sequelize.ARRAY(Sequelize.JSONB),
+        type: Sequelize.JSONB,
         allowNull: false,
-        defaultValue: [],
+        defaultValue: {},
       },
       createdAt: {
         type: Sequelize.DATE,
