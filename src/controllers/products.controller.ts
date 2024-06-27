@@ -73,6 +73,34 @@ const getProductId: ControllerAction = async (req, res) => {
     handleErrors(res, error);
   }
 };
+const getProductItemId: ControllerAction = async (req, res) => {
+  try {
+    const { itemId } = req.query;
+
+    if (!itemId) {
+      return res.status(400).json({
+        errType: "400",
+        msg: "ItemId is required",
+      });
+    }
+
+    // Знаходимо продукт за itemId
+    const product = await Product.findOne({
+      where: { itemId },
+    });
+
+    if (!product) {
+      return res.status(404).json({
+        errType: "404",
+        msg: "Product not found",
+      });
+    }
+
+    res.json(product);
+  } catch (error) {
+    handleErrors(res, error);
+  }
+};
 
 const getRecommended: ControllerAction = async (req, res) => {
   try {
@@ -141,6 +169,6 @@ const getByQuery: ControllerAction = async(req, res) => {
     }
 }
 
-const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts, getByQuery, getSortedProducts };
+const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts, getByQuery, getSortedProducts, getProductItemId };
 
 export default productController;
