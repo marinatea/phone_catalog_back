@@ -8,6 +8,8 @@ import productRouter from './routes/products.router';
 import { sequelize } from './models';
 import tabletRouter from './routes/tablets.route';
 import userRouter from './routes/users.router';
+import { orderMap } from './models/order';
+import orderRouter from './routes/order.router';
 
 const app: Application = express();
 
@@ -15,6 +17,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
+
+orderMap(sequelize);
 
 sequelize
   .sync()
@@ -24,6 +28,7 @@ sequelize
     app.use('/accessories', accessoryRouter);
     app.use('/phones', phoneRouter);
     app.use('/users', userRouter);
+    app.use("/orders", orderRouter);
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
