@@ -12,15 +12,17 @@ const addToList = async (user: User, newItem: any, type: 'cart' | 'favorites') =
   try {
     if (type === 'cart') {
       if (!(newItem.id in user.cart)) {
-        user.cart[newItem.id] = newItem;
+        const newList = { ...user.cart, [newItem.id]: newItem };
+
+        user.update({ cart: newList });
       }
     } else {
       if (!user.favorites.some((el) => el.itemId === newItem.itemId)) {
         user[type] = [...user[type], newItem];
+
+        user.save();
       }
     }
-
-    await user.save();
 
     return user[type];
   } catch (error) {
@@ -32,17 +34,21 @@ const removeFromList = async (user: User, itemId: any, type: 'cart' | 'favorites
   try {
     if (type === 'cart') {
       if (itemId in user.cart) {
-        delete user.cart[itemId];
+        const newList = { ...user.cart };
+
+        delete newList[itemId];
+
+        user.update({ cart: newList });
       }
     } else {
       const itemIndex = user[type].findIndex((item) => item.itemId === itemId);
 
       if (itemIndex > -1) {
         user[type] = [...user[type].slice(0, itemIndex), ...user[type].slice(itemIndex + 1)];
+
+        await user.save();
       }
     }
-
-    await user.save();
 
     return user[type];
   } catch (error) {
@@ -53,10 +59,11 @@ const removeFromList = async (user: User, itemId: any, type: 'cart' | 'favorites
 const patchCartItemCount = async (user: User, itemId: any, newCount: number) => {
   try {
     if (itemId in user.cart) {
-      user.cart[itemId].count = newCount;
-    }
+      const newList = { ...user.cart };
+      newList[itemId].count = newCount;
 
-    await user.save();
+      user.update({ cart: newList });
+    }
 
     return user.cart;
   } catch (error) {
