@@ -12,12 +12,8 @@ const getUser: ControllerAction = async (req, res) => {
       user = await userService.createUser(userId);
     }
 
-    console.log(user);
-
     res.send(user);
   } catch (error) {
-    console.log(error);
-
     handleErrors(res, error);
   }
 };

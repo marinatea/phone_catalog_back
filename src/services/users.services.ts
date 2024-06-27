@@ -10,9 +10,11 @@ const createUser = async (userId: string) => {
 
 const addToList = async (user: User, newItem: any, type: 'cart' | 'favorites') => {
   try {
-    user[type].push(newItem);
+    if (!user[type].some((el) => (type === 'cart' ? el.id === newItem.id : el.itemId === newItem.itemId))) {
+      user[type] = [...user[type], newItem];
 
-    await user.save();
+      await user.save();
+    }
 
     return user[type];
   } catch (error) {
@@ -28,7 +30,7 @@ const removeFromList = async (user: User, itemId: any, type: 'cart' | 'favorites
       return user[type];
     }
 
-    user[type].splice(itemIndex, 1);
+    user[type] = [...user[type].slice(0, itemIndex), ...user[type].slice(itemIndex + 1)];
 
     await user.save();
 
