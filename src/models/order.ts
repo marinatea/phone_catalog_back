@@ -15,9 +15,10 @@ export const orderMap = (sequelize: Sequelize): void => {
   Order.init(
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
       productId: {
         type: DataTypes.STRING,
