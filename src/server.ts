@@ -6,6 +6,7 @@ import phoneRouter from './routes/phones.route';
 import productRouter from './routes/products.router';
 import { sequelize } from './models';
 import tabletRouter from './routes/tablets.route';
+import userRouter from './routes/users.router';
 
 const app: Application = express();
 
@@ -20,6 +21,7 @@ sequelize
     app.use('/tablets', tabletRouter);
     app.use('/accessories', accessoryRouter);
     app.use('/phones', phoneRouter);
+    app.use('/users', userRouter);
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
