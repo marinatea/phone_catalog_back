@@ -24,47 +24,6 @@ const getAll: ControllerAction = async (req, res) => {
   }
 };
 
-// const getAll: ControllerAction = async (req, res) => {
-//   try {
-//     const { page = 1, limit = 16 } = req.query;
-//     const { productCategory, sortType, start, limit: paramLimit, query } = req.params;
-
-//     const parsedPage = parseInt(page as string, 10);
-//     const parsedLimit = parseInt(limit as string, 10);
-//     const parsedStartIndex = +start;
-//     const parsedLimitIndex = +paramLimit;
-
-//     let items;
-
-//     // Call getAll function with appropriate parameters based on request
-//     if (productCategory !== undefined && sortType !== undefined && parsedStartIndex !== undefined && parsedLimitIndex !== undefined) {
-//       items = await productService.getAllProducts({
-//         page: parsedPage,
-//         limit: parsedLimit,
-//         categoryType: productCategory,
-//         sortType,
-//         startIndex: parsedStartIndex,
-//         limitIndex: parsedLimitIndex,
-//       });
-//     } else if (query !== undefined) {
-//       items = await productService.getAllProducts({
-//         page: parsedPage,
-//         limit: parsedLimit,
-//         query,
-//       });
-//     } else {
-//       items = await productService.getAllProducts({
-//         page: parsedPage,
-//         limit: parsedLimit,
-//       });
-//     }
-
-//     res.json(items);
-//   } catch (error) {
-//     handleErrors(res, error);
-//   }
-// };
-
 const getSortedProducts: ControllerAction= async (req, res) => {
   try {
       const { category, sort, itemsPerPage, page } = req.query;
