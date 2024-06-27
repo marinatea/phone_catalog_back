@@ -2,43 +2,51 @@ import { ControllerAction } from "../utils/types";
 import Product from "../models/product";
 import { handleErrors } from "../utils/handleErrors";
 import productService from "../services/products.services";
-import { canTreatArrayAsAnd } from "sequelize/types/utils";
 
 const getAll: ControllerAction = async (req, res) => {
   try {
-    const {
-      page = 1,
-      limit = 16,
-      sort = "WITHOUT_SORT",
-      category = "",
-    } = req.query;
+    const { page = 1, limit = 16 } = req.query;
     const parsedPage = parseInt(page as string, 10);
     const parsedLimit = parseInt(limit as string, 10);
 
-    if (
-      isNaN(parsedPage) ||
-      isNaN(parsedLimit) ||
-      parsedPage < 1 ||
-      parsedLimit < 1
-    ) {
+    if (isNaN(parsedPage) || isNaN(parsedLimit) || parsedPage < 1 || parsedLimit < 1) {
       return res.status(400).json({
         errType: "400",
         msg: "Invalid page or limit parameters",
       });
     }
 
-    const products = await productService.getAllProducts(
-      parsedPage,
-      parsedLimit,
-      sort as string,
-      category as string
-    );
+    const products = await productService.getAllProducts(parsedPage, parsedLimit);
 
     res.json(products);
   } catch (error) {
     handleErrors(res, error);
   }
 };
+
+const getSortedProducts: ControllerAction= async (req, res) => {
+  try {
+      const { category, sort, itemsPerPage, page } = req.query;
+      const parsedPage = typeof page === 'string' ? parseInt(page, 10) : 1;
+      const parsedItemsPerPage = typeof itemsPerPage === 'string' ? parseInt(itemsPerPage, 10) : 16;
+
+      if (isNaN(parsedPage) || parsedPage < 1 || isNaN(parsedItemsPerPage) || parsedItemsPerPage < 1) {
+        return res.status(400).json({
+          errType: "400",
+          msg: 'Invalid page or itemsPerPage parameters.',
+        });
+      }
+
+      const startIndex = (parsedPage - 1) * parsedItemsPerPage;
+      const limitIndex = parsedItemsPerPage;
+
+      const items = await productService.sortProducts(category as string, sort as string, startIndex, limitIndex);
+      res.json(items);
+    } catch (error) {
+        handleErrors(res, error);
+    }
+};
+
 
 const getProductId: ControllerAction = async (req, res) => {
   try {
@@ -133,6 +141,6 @@ const getByQuery: ControllerAction = async(req, res) => {
     }
 }
 
-const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts, getByQuery };
+const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts, getByQuery, getSortedProducts };
 
 export default productController;

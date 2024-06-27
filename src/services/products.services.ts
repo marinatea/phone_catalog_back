@@ -1,7 +1,7 @@
-import { Op } from "sequelize";
+import { FindOptions, Op } from "sequelize";
 import Product from "../models/product";
-import { OrderItem } from "../utils/types";
 import { Sequelize } from "sequelize-typescript";
+import { SortType } from "../utils/types";
 
 const itemsPerPageOptions = [
   { value: 8, label: "8" },
@@ -11,45 +11,50 @@ const itemsPerPageOptions = [
   { value: Number.MAX_SAFE_INTEGER, label: "All" },
 ];
 
-const getAllProducts = async (
-  page: number = 1,
-  limit: number = 16,
-  sort: string = "WITHOUT_SORT",
-  category: string
-) => {
+const getAllProducts = async (page: number = 1, limit: number = 10) => {
   const offset = (page - 1) * limit;
-  let order: OrderItem[] = [];
-
-  switch (sort) {
-    case "AZ":
-      order = [{ column: "name", direction: "ASC" }];
-      break;
-    case "ZA":
-      order = [{ column: "name", direction: "DESC" }];
-      break;
-    case "LOW_TO_HIGH":
-      order = [{ column: "priceDiscount", direction: "ASC" }];
-      break;
-    case "HIGH_TO_LOW":
-      order = [{ column: "priceDiscount", direction: "DESC" }];
-      break;
-    case "NEWEST_TO_OLDEST":
-      order = [{ column: "year", direction: "DESC" }];
-      break;
-    case "OLDEST_TO_NEWEST":
-      order = [{ column: "year", direction: "ASC" }];
-      break;
-    default:
-      break;
-  }
-
-  return Product.findAndCountAll({
+  return Product.findAll({
     offset,
     limit,
-    order: order.map((item) => [item.column, item.direction]),
-    where: {
-      category,
-    },
+  });
+};
+
+const sortProducts = async (
+  categoryType: string,
+  sortType: string = "WITHOUT_SORT",
+  startIndex: number = 1,
+  limitIndex: number = 16
+) => {
+  let orderOptions: FindOptions<Product>['order'] = [];
+
+   switch (sortType) {
+    case SortType.AZ:
+      orderOptions = [['name', 'ASC']];
+      break;
+    case SortType.ZA:
+      orderOptions = [['name', 'DESC']];
+      break;
+    case SortType.LOW_TO_HIGH:
+      orderOptions = [['price', 'ASC']];
+      break;
+    case SortType.HIGH_TO_LOW:
+      orderOptions = [['price', 'DESC']];
+      break;
+    case SortType.NEWEST_TO_OLDEST:
+      orderOptions = [['year', 'ASC']];
+      break;
+    case SortType.OLDEST_TO_NEWEST:
+      orderOptions = [['year', 'DESC']];
+      break;
+    default:
+      orderOptions = [['id', 'ASC']];
+  }
+
+  return await Product.findAll({
+    where: { category: categoryType },
+    offset: startIndex,
+    limit: limitIndex,
+    order: orderOptions,
   });
 };
 
@@ -100,6 +105,7 @@ const getProductsByQuery= async(query: string) => {
 const productService = {
   getAllProducts,
   getRecommendedProducts,
+  sortProducts,
   getItemsPerPageOptions,
   getHotPricesProducts,
   getNewModelsProducts,
