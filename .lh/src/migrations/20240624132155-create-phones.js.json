@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/migrations/20240624132155-create-phones.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1724151471597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1724151471597,
+            "name": "Commit-0",
+            "content": "'use strict';\n\n/** @type {import('sequelize-cli').Migration} */\nmodule.exports = {\n  up: async (queryInterface, Sequelize) => {\n    await queryInterface.createTable('Phones', {\n      id: {\n        type: Sequelize.STRING(1024),\n        primaryKey: true,\n        allowNull: false,\n      },\n      category: {\n        type: Sequelize.STRING,\n      },\n      namespaceId: {\n        type: Sequelize.STRING(1024),\n      },\n      name: {\n        type: Sequelize.STRING(1024),\n      },\n      capacityAvailable: {\n        type: Sequelize.ARRAY(Sequelize.STRING(1024)),\n      },\n      capacity: {\n        type: Sequelize.STRING(1024),\n      },\n      priceRegular: {\n        type: Sequelize.INTEGER,\n      },\n      priceDiscount: {\n        type: Sequelize.INTEGER,\n      },\n      colorsAvailable: {\n        type: Sequelize.ARRAY(Sequelize.STRING(1024)),\n      },\n      color: {\n        type: Sequelize.STRING(1024),\n      },\n      images: {\n        type: Sequelize.ARRAY(Sequelize.STRING),\n      },\n      description: {\n        type: Sequelize.JSON,\n      },\n      screen: {\n        type: Sequelize.STRING(1024),\n      },\n      processor: {\n        type: Sequelize.STRING(1024),\n      },\n      resolution: {\n        type: Sequelize.STRING(1024),\n      },\n      ram: {\n        type: Sequelize.STRING(1024),\n      },\n      camera: {\n        type: Sequelize.STRING(1024),\n      },\n      zoom: {\n        type: Sequelize.STRING(1024),\n      },\n      cell: {\n        type: Sequelize.ARRAY(Sequelize.STRING(1024)),\n      },\n      createdAt: {\n        allowNull: false,\n        type: Sequelize.DATE,\n      },\n      updatedAt: {\n        allowNull: false,\n        type: Sequelize.DATE,\n      },\n    });\n  },\n\n  down: async (queryInterface) => {\n    await queryInterface.dropTable('Phones');\n  }\n};\n"
+        }
+    ]
+}

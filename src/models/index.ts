@@ -15,10 +15,10 @@ if (!process.env.DATABASE_URL) {
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   dialectOptions: {
-    ssl: {
+    ssl: process.env.DATABASE_SSL === 'true' ? {
       require: true,
       rejectUnauthorized: false,
-    },
+    } : false,
   },
   logging: false,
 });
