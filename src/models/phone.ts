@@ -1,7 +1,7 @@
 import { Model, Sequelize, DataTypes } from 'sequelize';
 
 export default class Phone extends Model {
-  public id?: string;
+  public id!: string;
   public category!: string;
   public namespaceId?: string;
   public name?: string;
@@ -29,7 +29,8 @@ export const PhoneMap = (sequelize: Sequelize) => {
       primaryKey: true,
     },
     category: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
     namespaceId: {
       type: DataTypes.STRING(255),
@@ -104,5 +105,6 @@ export const PhoneMap = (sequelize: Sequelize) => {
     tableName: 'Phones',
     timestamps: false
   });
-  Phone.sync();
-}
+
+  Phone.sync({ alter: true });
+};

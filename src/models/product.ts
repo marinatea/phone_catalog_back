@@ -20,45 +20,46 @@ export const ProductMap = (sequelize: Sequelize) => {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey: true,
     },
     category: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     itemId: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     name: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     fullPrice: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     price: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     screen: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     capacity: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     color: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     ram: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     year: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     image: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     }
   }, {
     sequelize,
     tableName: 'Products',
-    timestamps: false
+    timestamps: false,
   });
+
   Product.sync();
 }

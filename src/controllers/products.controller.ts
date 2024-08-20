@@ -1,7 +1,7 @@
-import { ControllerAction } from "../utils/types";
-import Product from "../models/product";
-import { handleErrors } from "../utils/handleErrors";
-import productService from "../services/products.services";
+import { ControllerAction } from '../utils/types';
+import Product from '../models/product';
+import { handleErrors } from '../utils/handleErrors';
+import productService from '../services/products.services';
 
 const getAll: ControllerAction = async (req, res) => {
   try {
@@ -26,27 +26,26 @@ const getAll: ControllerAction = async (req, res) => {
 
 const getSortedProducts: ControllerAction= async (req, res) => {
   try {
-      const { category, sort, itemsPerPage, page } = req.query;
-      const parsedPage = typeof page === 'string' ? parseInt(page, 10) : 1;
-      const parsedItemsPerPage = typeof itemsPerPage === 'string' ? parseInt(itemsPerPage, 10) : 16;
+    const { category, sort, itemsPerPage, page } = req.query;
+    const parsedPage = typeof page === 'string' ? parseInt(page, 10) : 1;
+    const parsedItemsPerPage = typeof itemsPerPage === 'string' ? parseInt(itemsPerPage, 10) : 16;
 
-      if (isNaN(parsedPage) || parsedPage < 1 || isNaN(parsedItemsPerPage) || parsedItemsPerPage < 1) {
-        return res.status(400).json({
-          errType: "400",
-          msg: 'Invalid page or itemsPerPage parameters.',
-        });
-      }
-
-      const startIndex = (parsedPage - 1) * parsedItemsPerPage;
-      const limitIndex = parsedItemsPerPage;
-
-      const items = await productService.sortProducts(category as string, sort as string, startIndex, limitIndex);
-      res.json(items);
-    } catch (error) {
-        handleErrors(res, error);
+    if (isNaN(parsedPage) || parsedPage < 1 || isNaN(parsedItemsPerPage) || parsedItemsPerPage < 1) {
+      return res.status(400).json({
+        errType: "400",
+        msg: 'Invalid page or itemsPerPage parameters.',
+      });
     }
-};
 
+    const startIndex = (parsedPage - 1) * parsedItemsPerPage;
+    const limitIndex = parsedItemsPerPage;
+
+    const items = await productService.sortProducts(category as string, sort as string, startIndex, limitIndex);
+    res.json(items);
+  } catch (error) {
+    handleErrors(res, error);
+  }
+};
 
 const getProductId: ControllerAction = async (req, res) => {
   try {
@@ -73,6 +72,7 @@ const getProductId: ControllerAction = async (req, res) => {
     handleErrors(res, error);
   }
 };
+
 const getProductItemId: ControllerAction = async (req, res) => {
   try {
     const { itemId } = req.query;
@@ -84,7 +84,6 @@ const getProductItemId: ControllerAction = async (req, res) => {
       });
     }
 
-    // Знаходимо продукт за itemId
     const product = await Product.findOne({
       where: { itemId },
     });
@@ -122,9 +121,7 @@ const getRecommended: ControllerAction = async (req, res) => {
       });
     }
 
-    const recommendedProducts = await productService.getRecommendedProducts(
-      productId
-    );
+    const recommendedProducts = await productService.getRecommendedProducts(productId);
 
     res.json(recommendedProducts);
   } catch (error) {
@@ -141,7 +138,6 @@ const getNewModelsProducts: ControllerAction = async (req, res) => {
   }
 };
 
-
 const getHotPricesProducts: ControllerAction = async (req, res) => {
   try {
     const products = await productService.getHotPricesProducts();
@@ -152,23 +148,33 @@ const getHotPricesProducts: ControllerAction = async (req, res) => {
 };
 
 const getByQuery: ControllerAction = async(req, res) => {
-    const { query } = req.params
-    try {
-        const allProducts = await productService.getProductsByQuery(query);
+  const { query } = req.params;
+  try {
+    const allProducts = await productService.getProductsByQuery(query);
 
-        if (!allProducts) {
-          res.status(404).json({
-            errType: "404",
-            msg: "Product not found",
-          });
-          return;
-        }
-        res.send(allProducts);
-    } catch (error) {
-      handleErrors(res, error);
+    if (!allProducts) {
+      res.status(404).json({
+        errType: "404",
+        msg: "Product not found",
+      });
+      return;
     }
+    res.send(allProducts);
+  } catch (error) {
+    handleErrors(res, error);
+  }
 }
 
-const productController = { getAll, getRecommended, getProductId, getHotPricesProducts, getNewModelsProducts, getByQuery, getSortedProducts, getProductItemId };
+const productController = {
+  getAll,
+  getRecommended,
+  getProductId,
+  getHotPricesProducts,
+  getNewModelsProducts,
+  getByQuery,
+  getSortedProducts,
+  getProductItemId,
+};
 
 export default productController;
+
