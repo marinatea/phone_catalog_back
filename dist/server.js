@@ -17,7 +17,7 @@ const order_router_1 = __importDefault(require("./routes/order.router"));
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());
-const PORT = parseInt(process.env.PORT, 10) || 3000;
+const PORT = parseInt(process.env.PORT, 10) || 5432;
 (0, order_1.orderMap)(models_1.sequelize);
 models_1.sequelize
     .sync()
