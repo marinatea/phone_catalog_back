@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1724153117950,
@@ -20,6 +20,18 @@
                 {
                     "date": 1724154838418,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n   \"name\": \"back\",\n   \"version\": \"1.0.0\",\n   \"main\": \"server.js\",\n   \"scripts\": {\n-    \"start\": \"node dist/server.ts\",\n+    \"start\": \"ts-node src/server.ts\",\n     \"dev\": \"nodemon src/server.ts\",\n     \"build\": \"tsc\",\n     \"lint\": \"eslint src/**/*.{js,ts}\"\n   },\n"
+                },
+                {
+                    "date": 1724155100165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+{\n+  \"name\": \"back\",\n+  \"version\": \"1.0.0\",\n+  \"main\": \"server.js\",\n+  \"scripts\": {\n+    \"start\": \"ts-node dist/server.ts\",\n+    \"dev\": \"nodemon src/server.ts\",\n+    \"build\": \"tsc\",\n+    \"lint\": \"eslint src/**/*.{js,ts}\"\n+  },\n+  \"keywords\": [],\n+  \"author\": \"\",\n+  \"license\": \"ISC\",\n+  \"description\": \"\",\n+  \"dependencies\": {\n+    \"@types/express\": \"^4.17.21\",\n+    \"cors\": \"^2.8.5\",\n+    \"dotenv\": \"^16.4.5\",\n+    \"express\": \"^4.19.2\",\n+    \"pg\": \"^8.12.0\",\n+    \"pg-hstore\": \"^2.3.4\",\n+    \"reflect-metadata\": \"^0.2.2\",\n+    \"sequelize\": \"^6.37.3\",\n+    \"sequelize-typescript\": \"^2.1.6\",\n+    \"ts-node\": \"^10.9.2\",\n+    \"typescript\": \"^5.5.2\"\n+  },\n+  \"devDependencies\": {\n+    \"@eslint/js\": \"^8.56.0\",\n+    \"@types/cors\": \"^2.8.17\",\n+    \"@types/node\": \"^20.14.8\",\n+    \"@types/sequelize\": \"^4.28.20\",\n+    \"eslint\": \"^8.56.0\",\n+    \"globals\": \"^15.6.0\",\n+    \"nodemon\": \"^3.1.4\",\n+    \"sequelize-cli\": \"^6.6.2\",\n+    \"typescript-eslint\": \"^7.14.1\"\n+  }\n+}\n"
+                },
+                {
+                    "date": 1724155184101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n   \"name\": \"back\",\n   \"version\": \"1.0.0\",\n   \"main\": \"server.js\",\n   \"scripts\": {\n-    \"start\": \"ts-node dist/server.ts\",\n+    \"start\": \"node dist/server.ts\",\n     \"dev\": \"nodemon src/server.ts\",\n     \"build\": \"tsc\",\n     \"lint\": \"eslint src/**/*.{js,ts}\"\n   },\n@@ -36,43 +36,4 @@\n     \"sequelize-cli\": \"^6.6.2\",\n     \"typescript-eslint\": \"^7.14.1\"\n   }\n }\n-{\n-  \"name\": \"back\",\n-  \"version\": \"1.0.0\",\n-  \"main\": \"server.js\",\n-  \"scripts\": {\n-    \"start\": \"ts-node src/server.ts\",\n-    \"dev\": \"nodemon src/server.ts\",\n-    \"build\": \"tsc\",\n-    \"lint\": \"eslint src/**/*.{js,ts}\"\n-  },\n-  \"keywords\": [],\n-  \"author\": \"\",\n-  \"license\": \"ISC\",\n-  \"description\": \"\",\n-  \"dependencies\": {\n-    \"@types/express\": \"^4.17.21\",\n-    \"cors\": \"^2.8.5\",\n-    \"dotenv\": \"^16.4.5\",\n-    \"express\": \"^4.19.2\",\n-    \"pg\": \"^8.12.0\",\n-    \"pg-hstore\": \"^2.3.4\",\n-    \"reflect-metadata\": \"^0.2.2\",\n-    \"sequelize\": \"^6.37.3\",\n-    \"sequelize-typescript\": \"^2.1.6\",\n-    \"ts-node\": \"^10.9.2\",\n-    \"typescript\": \"^5.5.2\"\n-  },\n-  \"devDependencies\": {\n-    \"@eslint/js\": \"^8.56.0\",\n-    \"@types/cors\": \"^2.8.17\",\n-    \"@types/node\": \"^20.14.8\",\n-    \"@types/sequelize\": \"^4.28.20\",\n-    \"eslint\": \"^8.56.0\",\n-    \"globals\": \"^15.6.0\",\n-    \"nodemon\": \"^3.1.4\",\n-    \"sequelize-cli\": \"^6.6.2\",\n-    \"typescript-eslint\": \"^7.14.1\"\n-  }\n-}\n"
+                },
+                {
+                    "date": 1724155254576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n   \"name\": \"back\",\n   \"version\": \"1.0.0\",\n   \"main\": \"server.js\",\n   \"scripts\": {\n-    \"start\": \"node dist/server.ts\",\n+    \"start\": \"ts-node dist/server.ts\",\n     \"dev\": \"nodemon src/server.ts\",\n     \"build\": \"tsc\",\n     \"lint\": \"eslint src/**/*.{js,ts}\"\n   },\n"
                 }
             ],
             "date": 1724153117950,
