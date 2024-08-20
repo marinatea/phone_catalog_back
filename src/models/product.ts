@@ -62,4 +62,3 @@ export const ProductMap = (sequelize: Sequelize) => {
   });
   Product.sync();
 }
-

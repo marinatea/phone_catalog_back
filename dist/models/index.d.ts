@@ -1,3 +1,3 @@
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from "sequelize-typescript";
 declare const sequelize: Sequelize;
 export { sequelize };

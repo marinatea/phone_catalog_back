@@ -1,24 +1,27 @@
-import { AccessoryMap } from './accessory';
-import { PhoneMap } from './phone';
-import { ProductMap } from './product';
-import { Sequelize } from 'sequelize-typescript';
-import { TabletMap } from './tablet';
-import { UserMap } from './user';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize-typescript";
+import { ProductMap } from "./product";
+import { PhoneMap } from "./phone";
+import { AccessoryMap } from "./accessory";
+import { TabletMap } from "./tablet";
+import { UserMap } from "./user";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not defined in environment variables');
+  throw new Error("DATABASE_URL is not defined in environment variables");
 }
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
+  dialect: "postgres",
   dialectOptions: {
-    ssl: process.env.DATABASE_SSL === 'true' ? {
-      require: true,
-      rejectUnauthorized: false,
-    } : false,
+    ssl:
+      process.env.DATABASE_SSL === "true"
+        ? {
+            require: true,
+            rejectUnauthorized: false,
+          }
+        : false,
   },
   logging: false,
 });
