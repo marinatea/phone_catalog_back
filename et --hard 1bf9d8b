@@ -1,0 +1,16 @@
+[33mc35274a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: reset: moving to HEAD~15
+[33m12495fc[m HEAD@{1}: reset: moving to HEAD~15
+[33mcfd262c[m HEAD@{2}: commit (merge): .
+[33m650f649[m HEAD@{3}: rebase (finish): returning to refs/heads/master
+[33m650f649[m HEAD@{4}: rebase (continue): build
+[33m8de2efe[m HEAD@{5}: rebase (continue): server
+[33m7423a2e[m HEAD@{6}: rebase (continue): data base
+[33m4d4f05a[m HEAD@{7}: rebase (pick): pas
+[33m41e0410[m HEAD@{8}: rebase (continue): main route
+[33m3e2d01e[m HEAD@{9}: rebase (continue): localehost
+[33mf46ffec[m HEAD@{10}: rebase (start): checkout HEAD~20
+[33m1bf9d8b[m HEAD@{11}: rebase (finish): returning to refs/heads/master
+[33m1bf9d8b[m HEAD@{12}: rebase (start): checkout HEAD~5
+[33m1bf9d8b[m HEAD@{13}: rebase (finish): returning to refs/heads/master
+[33m1bf9d8b[m HEAD@{14}: rebase (start): checkout HEAD~5
+[33m1bf9d8b[m HEAD@{15}: clone: from https://github.com/MaPaJBY/phone_catalog_back.git
