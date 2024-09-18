@@ -20,7 +20,10 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { page = 1, limit = 16 } = req.query;
         const parsedPage = parseInt(page, 10);
         const parsedLimit = parseInt(limit, 10);
-        if (isNaN(parsedPage) || isNaN(parsedLimit) || parsedPage < 1 || parsedLimit < 1) {
+        if (isNaN(parsedPage) ||
+            isNaN(parsedLimit) ||
+            parsedPage < 1 ||
+            parsedLimit < 1) {
             return res.status(400).json({
                 errType: "400",
                 msg: "Invalid page or limit parameters",
@@ -36,12 +39,15 @@ const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const getSortedProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { category, sort, itemsPerPage, page } = req.query;
-        const parsedPage = typeof page === 'string' ? parseInt(page, 10) : 1;
-        const parsedItemsPerPage = typeof itemsPerPage === 'string' ? parseInt(itemsPerPage, 10) : 16;
-        if (isNaN(parsedPage) || parsedPage < 1 || isNaN(parsedItemsPerPage) || parsedItemsPerPage < 1) {
+        const parsedPage = typeof page === "string" ? parseInt(page, 10) : 1;
+        const parsedItemsPerPage = typeof itemsPerPage === "string" ? parseInt(itemsPerPage, 10) : 16;
+        if (isNaN(parsedPage) ||
+            parsedPage < 1 ||
+            isNaN(parsedItemsPerPage) ||
+            parsedItemsPerPage < 1) {
             return res.status(400).json({
                 errType: "400",
-                msg: 'Invalid page or itemsPerPage parameters.',
+                msg: "Invalid page or itemsPerPage parameters.",
             });
         }
         const startIndex = (parsedPage - 1) * parsedItemsPerPage;

@@ -20,6 +20,10 @@ const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 
 orderMap(sequelize);
 
+app.get('/', (req, res) => {
+  res.send('API is running on http://localhost:' + PORT);
+});
+
 sequelize
   .sync()
   .then(() => {
