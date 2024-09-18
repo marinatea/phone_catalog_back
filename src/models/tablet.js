@@ -12,80 +12,80 @@ const TabletMap = (sequelize) => {
             primaryKey: true,
         },
         category: {
-            type: sequelize_1.DataTypes.STRING(255)
+            type: sequelize_1.DataTypes.STRING(255),
         },
         namespaceId: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         name: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         capacityAvailable: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
-            allowNull: true
+            allowNull: true,
         },
         capacity: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         priceRegular: {
             type: sequelize_1.DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
         },
         priceDiscount: {
             type: sequelize_1.DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
         },
         colorsAvailable: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
-            allowNull: true
+            allowNull: true,
         },
         color: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         images: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
-            allowNull: true
+            allowNull: true,
         },
         description: {
             type: sequelize_1.DataTypes.JSON,
-            allowNull: true
+            allowNull: true,
         },
         screen: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         resolution: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         processor: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         ram: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         camera: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         zoom: {
             type: sequelize_1.DataTypes.STRING(255),
-            allowNull: true
+            allowNull: true,
         },
         cell: {
             type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING),
-            allowNull: true
-        }
+            allowNull: true,
+        },
     }, {
         sequelize,
         tableName: 'Tablets',
-        timestamps: false
+        timestamps: false,
     });
     Tablet.sync();
 };

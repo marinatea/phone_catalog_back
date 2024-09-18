@@ -12,19 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const handleErrors_1 = require("../utils/handleErrors");
 const tablets_services_1 = __importDefault(require("../services/tablets.services"));
+const handleErrors_1 = require("../utils/handleErrors"); // Zakładam, że masz funkcję handleErrors
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const allTablets = yield tablets_services_1.default.getAllTablets();
-        if (!allTablets) {
-            res.status(404).json({
+        if (!allTablets || allTablets.length === 0) {
+            return res.status(404).json({
                 errType: '404',
-                msg: 'Not Found: The specified entity does not exist',
+                msg: 'Not Found: No tablets found',
             });
-            return;
         }
-        res.send(allTablets);
+        res.json(allTablets);
     }
     catch (error) {
         (0, handleErrors_1.handleErrors)(res, error);
@@ -35,13 +34,12 @@ const getById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { tabletId } = req.params;
         const tablet = yield tablets_services_1.default.getTabletById(tabletId);
         if (!tablet) {
-            res.status(404).json({
+            return res.status(404).json({
                 errType: '404',
-                msg: 'Not Found: The specified entity does not exist',
+                msg: 'Not Found: The specified tablet does not exist',
             });
-            return;
         }
-        res.send(tablet);
+        res.json(tablet);
     }
     catch (error) {
         (0, handleErrors_1.handleErrors)(res, error);

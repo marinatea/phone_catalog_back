@@ -14,10 +14,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const tablet_1 = __importDefault(require("../models/tablet"));
 const getAllTablets = () => __awaiter(void 0, void 0, void 0, function* () {
-    return tablet_1.default.findAll();
+    try {
+        return yield tablet_1.default.findAll();
+    }
+    catch (error) {
+        console.error('Error fetching all tablets:', error);
+        throw error;
+    }
 });
 const getTabletById = (tabletId) => __awaiter(void 0, void 0, void 0, function* () {
-    return tablet_1.default.findByPk(tabletId);
+    try {
+        return yield tablet_1.default.findByPk(tabletId);
+    }
+    catch (error) {
+        console.error(`Error fetching tablet with ID ${tabletId}:`, error);
+        throw error;
+    }
 });
 const tabletService = { getAllTablets, getTabletById };
 exports.default = tabletService;
