@@ -1,11 +1,21 @@
 import Tablet from '../models/tablet';
 
 const getAllTablets = async () => {
-  return Tablet.findAll();
+  try {
+    return await Tablet.findAll();
+  } catch (error) {
+    console.error('Error fetching all tablets:', error);
+    throw error;
+  }
 };
 
 const getTabletById = async (tabletId: string) => {
-  return Tablet.findByPk(tabletId);
+  try {
+    return await Tablet.findByPk(tabletId);
+  } catch (error) {
+    console.error(`Error fetching tablet with ID ${tabletId}:`, error);
+    throw error;
+  }
 };
 
 const tabletService = { getAllTablets, getTabletById };

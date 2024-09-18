@@ -1,38 +1,37 @@
-import { ControllerAction } from '../utils/types';
-import { handleErrors } from '../utils/handleErrors';
+import { Request, Response } from 'express';
 import tabletService from '../services/tablets.services';
+import { handleErrors } from '../utils/handleErrors'; // Zakładam, że masz funkcję handleErrors
 
-const getAll: ControllerAction = async (req, res) => {
+const getAll = async (req: Request, res: Response) => {
   try {
     const allTablets = await tabletService.getAllTablets();
 
-    if (!allTablets) {
-      res.status(404).json({
+    if (!allTablets || allTablets.length === 0) {
+      return res.status(404).json({
         errType: '404',
-        msg: 'Not Found: The specified entity does not exist',
+        msg: 'Not Found: No tablets found',
       });
-      return;
     }
-    res.send(allTablets);
+
+    res.json(allTablets);
   } catch (error) {
     handleErrors(res, error);
   }
 };
 
-const getById: ControllerAction = async (req, res) => {
+const getById = async (req: Request, res: Response) => {
   try {
     const { tabletId } = req.params;
     const tablet = await tabletService.getTabletById(tabletId);
 
     if (!tablet) {
-      res.status(404).json({
+      return res.status(404).json({
         errType: '404',
-        msg: 'Not Found: The specified entity does not exist',
+        msg: 'Not Found: The specified tablet does not exist',
       });
-      return;
     }
 
-    res.send(tablet);
+    res.json(tablet);
   } catch (error) {
     handleErrors(res, error);
   }

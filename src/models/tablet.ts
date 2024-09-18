@@ -29,80 +29,81 @@ export const TabletMap = (sequelize: Sequelize) => {
       primaryKey: true,
     },
     category: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
     },
     namespaceId: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     name: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     capacityAvailable: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
+      allowNull: true,
     },
     capacity: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     priceRegular: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
     },
     priceDiscount: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
     },
     colorsAvailable: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
+      allowNull: true,
     },
     color: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     images: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
+      allowNull: true,
     },
     description: {
       type: DataTypes.JSON,
-      allowNull: true
+      allowNull: true,
     },
     screen: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     resolution: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     processor: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     ram: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     camera: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     zoom: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     cell: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true
-    }
+      allowNull: true,
+    },
   }, {
     sequelize,
     tableName: 'Tablets',
-    timestamps: false
+    timestamps: false,
   });
+
   Tablet.sync();
-}
+};
