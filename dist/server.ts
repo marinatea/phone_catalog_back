@@ -16,7 +16,7 @@ const app: Application = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const PORT: number = parseInt(process.env.PORT as string, 10) || 5432;
+const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 
 orderMap(sequelize);
 
