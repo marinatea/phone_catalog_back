@@ -29,7 +29,7 @@ models_1.sequelize
     app.use('/users', users_router_1.default);
     app.use("/orders", order_router_1.default);
     app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
+        console.log(`Server is running on port http://localhost:${PORT}`);
     });
 })
     .catch((error) => {
