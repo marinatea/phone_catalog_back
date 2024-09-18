@@ -10,6 +10,8 @@ import tabletRouter from './routes/tablets.router';
 import userRouter from './routes/users.router';
 import { orderMap } from './models/order';
 import orderRouter from './routes/order.router';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app: Application = express();
 
